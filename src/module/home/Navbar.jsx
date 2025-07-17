@@ -2,6 +2,7 @@
 
 import { ChevronDown, Search, Menu, X } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 
 export function Navbar() {
@@ -29,12 +30,106 @@ export function Navbar() {
     setMobileActiveDropdown(mobileActiveDropdown === menu ? null : menu)
   }
 
+  // Menu data with URLs
+  const menuData = {
+    insights: {
+      title: "Insights",
+      sections: [
+        {
+          title: "Market Views",
+          items: [
+            { name: "Global Outlook", url: "/insights/market-views/global-outlook" },
+            { name: "Economic Analysis", url: "/insights/market-views/economic-analysis" },
+            { name: "Investment Themes", url: "/insights/market-views/investment-themes" }
+          ]
+        },
+        {
+          title: "Research",
+          items: [
+            { name: "Whitepapers", url: "/insights/research/whitepapers" },
+            { name: "Reports", url: "/insights/research/reports" },
+            { name: "Publications", url: "/insights/research/publications" }
+          ]
+        },
+        {
+          title: "Events",
+          items: [
+            { name: "Webinars", url: "/insights/events/webinars" },
+            { name: "Conferences", url: "/insights/events/conferences" }
+          ]
+        }
+      ]
+    },
+    solutions: {
+      title: "Solutions",
+      sections: [
+        {
+          title: "Services",
+          items: [
+            { name: "Asset Servicing", url: "/solutions/services/asset-servicing" },
+            { name: "Investment Management", url: "/solutions/services/investment-management" },
+            { name: "Data & Analytics", url: "/solutions/services/data-analytics" }
+          ]
+        },
+        {
+          title: "Clients",
+          items: [
+            { name: "Asset Managers", url: "/solutions/clients/asset-managers" },
+            { name: "Asset Owners", url: "/solutions/clients/asset-owners" },
+            { name: "Official Institutions", url: "/solutions/clients/official-institutions" }
+          ]
+        },
+        {
+          title: "Technology",
+          items: [
+            { name: "Front-to-Back", url: "/solutions/technology/front-to-back" },
+            { name: "Alpha", url: "/solutions/technology/alpha" }
+          ]
+        }
+      ]
+    },
+    about: {
+      title: "About",
+      sections: [
+        {
+          title: "Our Story",
+          items: [
+            { name: "Our Company", url: "/about/our-story/company" },
+            { name: "2024 Annual Report", url: "/about/our-story/annual-report" },
+            { name: "Industry Recognition", url: "/about/our-story/recognition" },
+            { name: "Office Locations", url: "/contact#office-locations" }
+          ]
+        },
+        {
+          title: "Our People",
+          items: [
+            { name: "Our Team", url: "/about/our-people/team" },
+            { name: "Leadership", url: "/about/our-people/leadership" },
+            { name: "Careers", url: "/careers", external: true }
+          ]
+        },
+        {
+          title: "Our Impact",
+          items: [
+            { name: "Sustainability", url: "/about/our-impact/sustainability" },
+            { name: "Operating Responsibly", url: "/about/our-impact/responsibility" },
+            { name: "Inclusion and Diversity", url: "/about/our-impact/diversity" },
+            { name: "Sustainability Reports, Policies and Disclosures", url: "/about/our-impact/reports" },
+            { name: "State Street Foundation", url: "/about/our-impact/foundation" }
+          ]
+        }
+      ]
+    }
+  }
+
   return (
     <div className="w-full bg-white relative" ref={navbarRef}>
       <div className="pt-4">
         {/* Logo and Main Header */}
         <div className="flex max-w-[1380px] mx-auto items-center mb-2 gap-2 px-4">
-          <Image src="/sas_logo.png" width={250} height={100} alt="sas_logo" />
+          <Link href="/">
+            <Image src="/sas_logo.png" width={250} height={100} alt="sas_logo" />
+          </Link>
           {/* Hamburger Menu for Mobile */}
           <div className="ml-auto md:hidden">
             <button onClick={() => setIsMobileMenuOpen(true)} aria-label="Open menu">
@@ -48,47 +143,20 @@ export function Navbar() {
           <div className="max-w-[1380px] px-6 mx-auto flex items-center w-full">
             {/* Navigation Items */}
             <div className="flex space-x-8">
-              {/* Insights Dropdown Trigger */}
-              <div className="relative">
-                <button
-                  className={`py-5 text-primary text-lg font-medium flex items-center ${activeDropdown === "insights" ? "text-state-street-blue-dark" : "hover:text-state-street-blue-dark"}`}
-                  onMouseEnter={() => handleMouseEnter("insights")}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  Insights{" "}
-                  <ChevronDown
-                    className={`w-4 h-4 ml-1 transition-transform ${activeDropdown === "insights" ? "rotate-180" : ""}`}
-                  />
-                </button>
-              </div>
-
-              {/* Solutions Dropdown Trigger */}
-              <div className="relative">
-                <button
-                  className={`py-5 text-primary text-lg font-medium flex items-center ${activeDropdown === "solutions" ? "text-state-street-blue-dark" : "hover:text-state-street-blue-dark"}`}
-                  onMouseEnter={() => handleMouseEnter("solutions")}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  Solutions{" "}
-                  <ChevronDown
-                    className={`w-4 h-4 ml-1 transition-transform ${activeDropdown === "solutions" ? "rotate-180" : ""}`}
-                  />
-                </button>
-              </div>
-
-              {/* About Dropdown Trigger */}
-              <div className="relative">
-                <button
-                  className={`py-5 text-primary text-lg font-medium flex items-center ${activeDropdown === "about" ? "border-state-street-blue-dark text-state-street-blue-dark" : "border-state-street-blue-medium hover:text-state-street-blue-dark"}`}
-                  onMouseEnter={() => handleMouseEnter("about")}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  About{" "}
-                  <ChevronDown
-                    className={`w-4 h-4 ml-1 transition-transform ${activeDropdown === "about" ? "rotate-180" : ""}`}
-                  />
-                </button>
-              </div>
+              {Object.entries(menuData).map(([key, menu]) => (
+                <div className="relative" key={key}>
+                  <button
+                    className={`py-5 text-primary text-lg font-medium flex items-center ${activeDropdown === key ? "text-state-street-blue-dark" : "hover:text-state-street-blue-dark"}`}
+                    onMouseEnter={() => handleMouseEnter(key)}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    {menu.title}{" "}
+                    <ChevronDown
+                      className={`w-4 h-4 ml-1 transition-transform ${activeDropdown === key ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                </div>
+              ))}
             </div>
 
             {/* Search - Right aligned */}
@@ -114,154 +182,30 @@ export function Navbar() {
           onMouseEnter={() => handleMouseEnter(activeDropdown)}
           onMouseLeave={handleMouseLeave}
         >
-          {activeDropdown === "insights" && (
-            <div className="max-w-[1380px] mx-auto py-8 px-6 grid grid-cols-4 gap-8">
-              {/* Insights content */}
-              <div>
-                <h1 className="text-4xl font-bold text-primary mb-6">Insights</h1>
-              </div>
-              <div>
-                <h2 className="text-xl font-semibold text-primary mb-4">Market Views</h2>
-                <ul className="space-y-2">
-                  {["Global Outlook", "Economic Analysis", "Investment Themes"].map((item) => (
-                    <li key={item}>
-                      <a href="#" className="text-gray-700 hover:text-primary transition-colors">
-                        {item}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h2 className="text-xl font-semibold text-primary mb-4">Research</h2>
-                <ul className="space-y-2">
-                  {["Whitepapers", "Reports", "Publications"].map((item) => (
-                    <li key={item}>
-                      <a href="#" className="text-gray-700 hover:text-primary transition-colors">
-                        {item}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h2 className="text-xl font-semibold text-primary mb-4">Events</h2>
-                <ul className="space-y-2">
-                  {["Webinars", "Conferences"].map((item) => (
-                    <li key={item}>
-                      <a href="#" className="text-gray-700 hover:text-primary transition-colors">
-                        {item}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          <div className="max-w-[1380px] mx-auto py-8 px-6 grid grid-cols-4 gap-8">
+            <div>
+              <h1 className="text-4xl font-bold text-primary mb-6">{menuData[activeDropdown].title}</h1>
             </div>
-          )}
-
-          {activeDropdown === "solutions" && (
-            <div className="max-w-[1380px] mx-auto py-8 px-6 grid grid-cols-4 gap-8">
-              {/* Solutions content */}
-              <div>
-                <h1 className="text-4xl font-bold text-primary mb-6">Solutions</h1>
-              </div>
-              <div>
-                <h2 className="text-xl font-semibold text-primary mb-4">Services</h2>
+            {menuData[activeDropdown].sections.map((section, index) => (
+              <div key={index}>
+                <h2 className="text-xl font-semibold text-primary mb-4">{section.title}</h2>
                 <ul className="space-y-2">
-                  {["Asset Servicing", "Investment Management", "Data & Analytics"].map((item) => (
-                    <li key={item}>
-                      <a href="#" className="text-gray-700 hover:text-primary transition-colors">
-                        {item}
-                      </a>
+                  {section.items.map((item, itemIndex) => (
+                    <li key={itemIndex}>
+                      <Link 
+                        href={item.url} 
+                        className="text-gray-700 hover:text-primary transition-colors"
+                        target={item.external ? "_blank" : undefined}
+                      >
+                        {item.name}
+                        {item.external && <span className="ml-1 text-sm">↗</span>}
+                      </Link>
                     </li>
                   ))}
                 </ul>
               </div>
-              <div>
-                <h2 className="text-xl font-semibold text-primary mb-4">Clients</h2>
-                <ul className="space-y-2">
-                  {["Asset Managers", "Asset Owners", "Official Institutions"].map((item) => (
-                    <li key={item}>
-                      <a href="#" className="text-gray-700 hover:text-primary transition-colors">
-                        {item}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h2 className="text-xl font-semibold text-primary mb-4">Technology</h2>
-                <ul className="space-y-2">
-                  {["Front-to-Back", "Alpha"].map((item) => (
-                    <li key={item}>
-                      <a href="#" className="text-gray-700 hover:text-primary transition-colors">
-                        {item}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          )}
-
-          {activeDropdown === "about" && (
-            <div className="max-w-[1380px] mx-auto py-8 px-6 grid grid-cols-4 gap-8">
-              {/* About content */}
-              <div>
-                <h1 className="text-4xl font-bold text-primary mb-6">About</h1>
-              </div>
-              <div>
-                <h2 className="text-xl font-semibold text-primary mb-4">Our Story</h2>
-                <ul className="space-y-2">
-                  {["Our Company", "2024 Annual Report", "Industry Recognition", "Office Locations"].map((item) => (
-                    <li key={item}>
-                      <a href="#" className="text-gray-700 hover:text-primary transition-colors">
-                        {item}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h2 className="text-xl font-semibold text-primary mb-4">Our People</h2>
-                <ul className="space-y-2">
-                  {["Our Team", "Leadership"].map((item) => (
-                    <li key={item}>
-                      <a href="#" className="text-gray-700 hover:text-primary transition-colors">
-                        {item}
-                      </a>
-                    </li>
-                  ))}
-                  <li>
-                    <a
-                      href="#"
-                      className="text-gray-700 hover:text-primary transition-colors flex items-center"
-                    >
-                      Careers <span className="ml-1 text-sm">↗</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h2 className="text-xl font-semibold text-primary mb-4">Our Impact</h2>
-                <ul className="space-y-2">
-                  {[
-                    "Sustainability",
-                    "Operating Responsibly",
-                    "Inclusion and Diversity",
-                    "Sustainability Reports, Policies and Disclosures",
-                    "State Street Foundation",
-                  ].map((item) => (
-                    <li key={item}>
-                      <a href="#" className="text-gray-700 hover:text-primary transition-colors">
-                        {item}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          )}
+            ))}
+          </div>
         </div>
       )}
 
@@ -269,7 +213,9 @@ export function Navbar() {
       {isMobileMenuOpen && (
         <div className="fixed inset-0 bg-white z-[100] flex flex-col md:hidden">
           <div className="flex justify-between items-center p-4 border-b border-gray-200">
-          <Image src="/sas_logo.png" width={250} height={100} alt="sas_logo" />
+            <Link href="/">
+              <Image src="/sas_logo.png" width={250} height={100} alt="sas_logo" />
+            </Link>
             <button onClick={() => setIsMobileMenuOpen(false)} aria-label="Close menu">
               <X className="w-6 h-6 text-primary" />
             </button>
@@ -287,223 +233,46 @@ export function Navbar() {
 
             {/* Mobile Navigation Items */}
             <div className="space-y-4">
-              {/* Insights Mobile */}
-              <div>
-                <button
-                  className="w-full text-left py-2 text-primary text-xl font-medium flex items-center justify-between"
-                  onClick={() => toggleMobileDropdown("insights")}
-                >
-                  Insights{" "}
-                  <ChevronDown
-                    className={`w-5 h-5 transition-transform ${mobileActiveDropdown === "insights" ? "rotate-180" : ""}`}
-                  />
-                </button>
-                {mobileActiveDropdown === "insights" && (
-                  <div className="pl-4 pt-2 space-y-3 bg-white rounded-md mt-2 py-3">
-                    <h3 className="font-semibold text-primary text-lg px-2">Market Views</h3>
-                    <ul className="space-y-2 text-gray-700 px-2">
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Global Outlook
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Economic Analysis
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Investment Themes
-                        </a>
-                      </li>
-                    </ul>
-                    <h3 className="font-semibold text-primary text-lg px-2 pt-2">Research</h3>
-                    <ul className="space-y-2 text-gray-700 px-2">
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Whitepapers
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Reports
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Publications
-                        </a>
-                      </li>
-                    </ul>
-                    <h3 className="font-semibold text-primary text-lg px-2 pt-2">Events</h3>
-                    <ul className="space-y-2 text-gray-700 px-2">
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Webinars
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Conferences
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                )}
-              </div>
-
-              {/* Solutions Mobile */}
-              <div>
-                <button
-                  className="w-full text-left py-2 text-primary text-xl font-medium flex items-center justify-between"
-                  onClick={() => toggleMobileDropdown("solutions")}
-                >
-                  Solutions{" "}
-                  <ChevronDown
-                    className={`w-5 h-5 transition-transform ${mobileActiveDropdown === "solutions" ? "rotate-180" : ""}`}
-                  />
-                </button>
-                {mobileActiveDropdown === "solutions" && (
-                  <div className="pl-4 pt-2 space-y-3 bg-white rounded-md mt-2 py-3">
-                    <h3 className="font-semibold text-primary text-lg px-2">Services</h3>
-                    <ul className="space-y-2 text-gray-700 px-2">
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Asset Servicing
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Investment Management
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Data & Analytics
-                        </a>
-                      </li>
-                    </ul>
-                    <h3 className="font-semibold text-primary text-lg px-2 pt-2">Clients</h3>
-                    <ul className="space-y-2 text-gray-700 px-2">
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Asset Managers
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Asset Owners
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Official Institutions
-                        </a>
-                      </li>
-                    </ul>
-                    <h3 className="font-semibold text-primary text-lg px-2 pt-2">Technology</h3>
-                    <ul className="space-y-2 text-gray-700 px-2">
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Front-to-Back
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Alpha
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                )}
-              </div>
-
-              {/* About Mobile */}
-              <div>
-                <button
-                  className="w-full text-left py-2 text-primary text-xl font-medium flex items-center justify-between"
-                  onClick={() => toggleMobileDropdown("about")}
-                >
-                  About{" "}
-                  <ChevronDown
-                    className={`w-5 h-5 transition-transform ${mobileActiveDropdown === "about" ? "rotate-180" : ""}`}
-                  />
-                </button>
-                {mobileActiveDropdown === "about" && (
-                  <div className="pl-4 pt-2 space-y-3 bg-white rounded-md mt-2 py-3">
-                    <h3 className="font-semibold text-primary text-lg px-2">Our Story</h3>
-                    <ul className="space-y-2 text-gray-700 px-2">
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Our Company
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          2024 Annual Report
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Industry Recognition
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Office Locations
-                        </a>
-                      </li>
-                    </ul>
-                    <h3 className="font-semibold text-primary text-lg px-2 pt-2">Our People</h3>
-                    <ul className="space-y-2 text-gray-700 px-2">
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Our Team
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Leadership
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="block hover:text-primary flex items-center">
-                          Careers <span className="ml-1 text-sm">↗</span>
-                        </a>
-                      </li>
-                    </ul>
-                    <h3 className="font-semibold text-primary text-lg px-2 pt-2">Our Impact</h3>
-                    <ul className="space-y-2 text-gray-700 px-2">
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Sustainability
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Operating Responsibly
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Inclusion and Diversity
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          Sustainability Reports, Policies and Disclosures
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#" className="block hover:text-primary">
-                          State Street Foundation
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                )}
-              </div>
+              {Object.entries(menuData).map(([key, menu]) => (
+                <div key={key}>
+                  <button
+                    className="w-full text-left py-2 text-primary text-xl font-medium flex items-center justify-between"
+                    onClick={() => toggleMobileDropdown(key)}
+                  >
+                    {menu.title}{" "}
+                    <ChevronDown
+                      className={`w-5 h-5 transition-transform ${mobileActiveDropdown === key ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  {mobileActiveDropdown === key && (
+                    <div className="pl-4 pt-2 space-y-3 bg-white rounded-md mt-2 py-3">
+                      {menu.sections.map((section, sectionIndex) => (
+                        <div key={sectionIndex}>
+                          <h3 className="font-semibold text-primary text-lg px-2">{section.title}</h3>
+                          <ul className="space-y-2 text-gray-700 px-2">
+                            {section.items.map((item, itemIndex) => (
+                              <li key={itemIndex}>
+                                <Link 
+                                  href={item.url} 
+                                  className="block hover:text-primary"
+                                  target={item.external ? "_blank" : undefined}
+                                  onClick={() => setIsMobileMenuOpen(false)}
+                                >
+                                  {item.name}
+                                  {item.external && <span className="ml-1 text-sm">↗</span>}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                          {sectionIndex < menu.sections.length - 1 && (
+                            <div className="pt-2"></div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         </div>

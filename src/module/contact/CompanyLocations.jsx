@@ -41,7 +41,7 @@ export default function CompanyLocations() {
   ]
 
   return (
-    <div className="">
+    <div id="office-locations" className="">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {addresses.map((address, index) => (
           <div key={index} className="bg-white rounded-lg">
