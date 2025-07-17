@@ -7,7 +7,7 @@ export default function Footer() {
       <div className="max-w-[1380px] mx-auto px-4">
         {/* Top section */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between pb-4 border-b border-gray-700">
-          <Link href="#" className="text-base underline mb-4 md:mb-0">
+          <Link href="/contact" className="text-base underline mb-4 md:mb-0">
             Contact Us
           </Link>
           <div className="flex items-center justify-between flex-wrap gap-4">
