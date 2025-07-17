@@ -16,7 +16,7 @@ const SisterConcern = () => {
     return (
         <div>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-10'>
-                {sisterConcern.map(sister => (
+                {sisterConcern?.map(sister => (
                     <div key={sister.id}>
                         <Image 
                             className='w-[100%] h-[180px] object-cover' 
