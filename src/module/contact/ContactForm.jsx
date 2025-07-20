@@ -7,7 +7,7 @@ import { HelpCircle } from "lucide-react"
 
 export default function ContactForm() {
   return (
-    <div className="container mx-auto py-12 px-4 md:px-6 lg:px-8 max-w-4xl">
+    <div className="mx-auto py-12 max-w-4xl">
       <h1 className="text-5xl font-bold text-[#0000FF] mb-8">Let{"'"}s connect</h1>
 
       <div className="mb-12 text-gray-700">

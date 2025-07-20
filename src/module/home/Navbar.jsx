@@ -96,7 +96,7 @@ export function Navbar() {
           items: [
             { name: "Our Company", url: "/about/our-story/company" },
             { name: "2024 Annual Report", url: "/about/our-story/annual-report" },
-            { name: "Industry Recognition", url: "/about/our-story/recognition" },
+            { name: "Industry Recognition", url: "/about/our-story/industry-recognition" },
             { name: "Office Locations", url: "/contact#office-locations" }
           ]
         },
@@ -109,13 +109,10 @@ export function Navbar() {
           ]
         },
         {
-          title: "Our Impact",
+          title: "Contact Information",
           items: [
-            { name: "Sustainability", url: "/about/our-impact/sustainability" },
-            { name: "Operating Responsibly", url: "/about/our-impact/responsibility" },
-            { name: "Inclusion and Diversity", url: "/about/our-impact/diversity" },
-            { name: "Sustainability Reports, Policies and Disclosures", url: "/about/our-impact/reports" },
-            { name: "State Street Foundation", url: "/about/our-impact/foundation" }
+            { name: "Contact Form", url: "/contact" },
+            { name: "Office Locations", url: "/contact#office-locations" }
           ]
         }
       ]

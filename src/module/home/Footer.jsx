@@ -3,7 +3,7 @@ import { X, Linkedin, Youtube, Facebook } from "lucide-react"
 
 export default function Footer() {
   return (
-    <footer className="bg-[#000050] text-white py-8 px-4 md:px-6 lg:px-8">
+    <footer className="bg-[#000050] text-white py-8">
       <div className="max-w-[1380px] mx-auto px-4">
         {/* Top section */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between pb-4 border-b border-gray-700">
