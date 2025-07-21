@@ -1,11 +1,14 @@
 "use client"
 
+import useServiceMenuItems from "@/hooks/useServiceMenuItems"
 import { ChevronDown, Search, Menu, X } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 
 export function Navbar() {
+  const { items: dynamicServiceItems, loading, error } = useServiceMenuItems();
+  console.log(dynamicServiceItems);
   const [activeDropdown, setActiveDropdown] = useState(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [mobileActiveDropdown, setMobileActiveDropdown] = useState(null)
@@ -65,11 +68,7 @@ export function Navbar() {
       sections: [
         {
           title: "Services",
-          items: [
-            { name: "Asset Servicing", url: "/solutions/services/asset-servicing" },
-            { name: "Investment Management", url: "/solutions/services/investment-management" },
-            { name: "Data & Analytics", url: "/solutions/services/data-analytics" }
-          ]
+          items: dynamicServiceItems
         },
         {
           title: "Clients",

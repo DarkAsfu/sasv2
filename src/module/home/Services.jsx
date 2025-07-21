@@ -12,13 +12,13 @@ const Services = () => {
 
     if (loading) return (
         <div className="flex justify-center items-center h-64">
-            <p className="text-lg text-gray-600">Loading services...</p>
+            <p className="text-lg text-gray-600">Loading ...</p>
         </div>
     );
 
     if (error) return (
         <div className="bg-red-50 p-4 rounded-md text-center">
-            <p className="text-red-600">Error loading services: {error}</p>
+            <p className="text-red-600">Error loading : {error}</p>
         </div>
     );
 
