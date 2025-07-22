@@ -17,7 +17,10 @@ const page = () => {
     return (
         <div>
             <SectionLayout title={"Meet Our Leaders"}>
-                <Dysection2 img={leader[0]?.image} title={"Who we are"} desc={leader[0].short_description} label={"Get to know use"} url={"/about/our-people/leadership"} />
+                {
+                    leader &&
+                    <Dysection2 img={leader[0]?.image} title={"Who we are"} desc={leader[0].short_description} label={"Get to know use"} url={"/about/our-people/leadership"} />
+                }
             </SectionLayout>
             <hr className='max-w-[1348px] mx-auto px-4' />
             <SectionLayout title={"Our key Management"} >

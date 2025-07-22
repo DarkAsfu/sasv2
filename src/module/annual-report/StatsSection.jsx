@@ -6,9 +6,9 @@ const StatsSection = ({ title, statsData }) => {
     ]
   
     const bottomRowStats = [
-      { label: "Largest asset manager globally", value: "1st", footnote: "1" },
-      { label: "Total investments managed", value: `$${(statsData.investments / 1000000).toFixed(1)}M`, footnote: "2" },
-      { label: "Strategic partners worldwide", value: `${statsData.partners}+`, footnote: "3" },
+      { label: "Largest asset manager globally", value: "1st" },
+      { label: "Total investments managed", value: `$${(statsData.investments / 1000000).toFixed(1)}M` },
+      { label: "Strategic partners worldwide", value: `${statsData.partners}+` },
     ]
   
     return (

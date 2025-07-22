@@ -1,5 +1,7 @@
 "use client"
 
+import useBlogsMenuItems from "@/hooks/useBlogsMenuItems"
+import useClientMenuItems from "@/hooks/useClientMenuItems"
 import useServiceMenuItems from "@/hooks/useServiceMenuItems"
 import { ChevronDown, Search, Menu, X } from "lucide-react"
 import Image from "next/image"
@@ -8,6 +10,8 @@ import { useEffect, useRef, useState } from "react"
 
 export function Navbar() {
   const { items: dynamicServiceItems, loading, error } = useServiceMenuItems();
+  const { items: dynamicClientItems } = useClientMenuItems();
+  const { items: dynamicFeatBlogs } = useBlogsMenuItems();
   console.log(dynamicServiceItems);
   const [activeDropdown, setActiveDropdown] = useState(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -39,26 +43,21 @@ export function Navbar() {
       title: "Insights",
       sections: [
         {
-          title: "Market Views",
+          title: "Our Culture",
           items: [
-            { name: "Global Outlook", url: "/insights/market-views/global-outlook" },
-            { name: "Economic Analysis", url: "/insights/market-views/economic-analysis" },
-            { name: "Investment Themes", url: "/insights/market-views/investment-themes" }
+            { name: "Gallery", url: "/gallery" },
+            { name: "Client Review", url: "/client-review" }
           ]
         },
         {
-          title: "Research",
-          items: [
-            { name: "Whitepapers", url: "/insights/research/whitepapers" },
-            { name: "Reports", url: "/insights/research/reports" },
-            { name: "Publications", url: "/insights/research/publications" }
-          ]
+          title: "Featured Blogs",
+          items: dynamicFeatBlogs
         },
         {
-          title: "Events",
+          title: "Others",
           items: [
-            { name: "Webinars", url: "/insights/events/webinars" },
-            { name: "Conferences", url: "/insights/events/conferences" }
+            // { name: "Event", url: "/insights/events/" },
+            { name: "All Blogs", url: "/blogs/" }
           ]
         }
       ]
@@ -72,11 +71,7 @@ export function Navbar() {
         },
         {
           title: "Clients",
-          items: [
-            { name: "Asset Managers", url: "/solutions/clients/asset-managers" },
-            { name: "Asset Owners", url: "/solutions/clients/asset-owners" },
-            { name: "Official Institutions", url: "/solutions/clients/official-institutions" }
-          ]
+          items: dynamicClientItems
         },
         {
           title: "Technology",
@@ -96,7 +91,7 @@ export function Navbar() {
             { name: "Our Company", url: "/about/our-story/company" },
             { name: "2024 Annual Report", url: "/about/our-story/annual-report" },
             { name: "Industry Recognition", url: "/about/our-story/industry-recognition" },
-            { name: "Office Locations", url: "/contact#office-locations" }
+            // { name: "Office Locations", url: "/contact#office-locations" }
           ]
         },
         {
@@ -188,8 +183,8 @@ export function Navbar() {
                 <ul className="space-y-2">
                   {section.items.map((item, itemIndex) => (
                     <li key={itemIndex}>
-                      <Link 
-                        href={item.url} 
+                      <Link
+                        href={item?.url}
                         className="text-gray-700 hover:text-primary transition-colors"
                         target={item.external ? "_blank" : undefined}
                       >
@@ -248,8 +243,8 @@ export function Navbar() {
                           <ul className="space-y-2 text-gray-700 px-2">
                             {section.items.map((item, itemIndex) => (
                               <li key={itemIndex}>
-                                <Link 
-                                  href={item.url} 
+                                <Link
+                                  href={item.url}
                                   className="block hover:text-primary"
                                   target={item.external ? "_blank" : undefined}
                                   onClick={() => setIsMobileMenuOpen(false)}

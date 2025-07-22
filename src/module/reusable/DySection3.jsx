@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-const DySection3 = ({ data, url }) => {
+const DySection3 = ({ data, url, label }) => {
     return (
         <div>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-10'>
@@ -22,7 +22,7 @@ const DySection3 = ({ data, url }) => {
                         />
                         {
                             url && <Link className='text-primary font-normal font-inter' href={`/${url}/${d.id}`}>
-                                Learn More
+                                {label? label : "Learn More"}
                             </Link>
                         }
                     </div>
