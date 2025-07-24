@@ -1,7 +1,7 @@
 "use client"
 
 import useBlogsMenuItems from "@/hooks/useBlogsMenuItems"
-import useClientMenuItems from "@/hooks/useClientMenuItems"
+import useClientMenuItems from "@/hooks/usePartnersInfo"
 import useServiceMenuItems from "@/hooks/useServiceMenuItems"
 import { ChevronDown, Search, Menu, X } from "lucide-react"
 import Image from "next/image"
@@ -70,16 +70,18 @@ export function Navbar() {
           items: dynamicServiceItems
         },
         {
-          title: "Clients",
-          items: dynamicClientItems
-        },
-        {
-          title: "Technology",
+          title: "Partners",
+          // items: dynamicClientItems
           items: [
-            { name: "Front-to-Back", url: "/solutions/technology/front-to-back" },
-            { name: "Alpha", url: "/solutions/technology/alpha" }
+            { name: "All Partners", url: "/all-partners" },
           ]
-        }
+        },
+        // {
+        //   title: "Technology",
+        //   items: [
+        //     { name: "NFC", url: "#" },
+        //   ]
+        // }
       ]
     },
     about: {
@@ -151,7 +153,7 @@ export function Navbar() {
             </div>
 
             {/* Search - Right aligned */}
-            <div className="ml-auto flex items-center">
+            {/* <div className="ml-auto flex items-center">
               <div className="relative">
                 <input
                   type="text"
@@ -160,7 +162,7 @@ export function Navbar() {
                 />
                 <Search className="absolute right-0 top-0 w-5 h-5 text-primary mt-1" />
               </div>
-            </div>
+            </div> */}
           </div>
         </nav>
       </div>
@@ -213,14 +215,14 @@ export function Navbar() {
           </div>
           <div className="flex-1 overflow-y-auto p-6">
             {/* Mobile Search */}
-            <div className="relative mb-6">
+            {/* <div className="relative mb-6">
               <input
                 type="text"
                 placeholder="Search"
                 className="w-full bg-transparent border-b border-state-street-blue-medium pb-2 pr-8 text-primary placeholder-state-street-blue-medium text-lg font-medium focus:outline-none"
               />
               <Search className="absolute right-0 top-1 w-5 h-5 text-primary" />
-            </div>
+            </div> */}
 
             {/* Mobile Navigation Items */}
             <div className="space-y-4">

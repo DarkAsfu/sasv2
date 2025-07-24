@@ -1,11 +1,14 @@
+'use client'
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { HelpCircle } from "lucide-react"
+import useContactInfo from "@/hooks/useContactInfo"
 
 export default function ContactForm() {
+  const {contactinfo} = useContactInfo();
   return (
     <div className="mx-auto py-12 max-w-4xl">
       <h1 className="text-5xl font-bold text-[#0000FF] mb-8">Let{"'"}s connect</h1>
@@ -16,9 +19,9 @@ export default function ContactForm() {
           we{"'"}re here to help.
         </p>
         <h2 className="text-xl font-semibold mb-2">Give us a call</h2>
-        <p className="text-lg text-[#0000FF] underline mb-2">+1 (617) 786-3000</p>
-        <p className="text-sm">Operator relay calls are welcome.</p>
-        <p className="text-sm">Need speech or hearing support? Dial 711.</p>
+        {contactinfo?.phone && <p className="text-lg text-[#0000FF] underline mb-2">{contactinfo?.phone}</p>}
+        {/* <p className="text-sm">Operator relay calls are welcome.</p>
+        <p className="text-sm">Need speech or hearing support? Dial 711.</p> */}
       </div>
 
       <div className="border-t border-gray-300 pt-8 mb-8" />
