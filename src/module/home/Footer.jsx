@@ -1,6 +1,6 @@
 'use client'
 import Link from "next/link"
-import { X, Linkedin, Youtube, Facebook } from "lucide-react"
+import { X, Linkedin, Youtube, Facebook, Instagram } from "lucide-react"
 import useContactInfo from "@/hooks/useContactInfo"
 
 export default function Footer() {
@@ -8,7 +8,7 @@ export default function Footer() {
   if(loading){
     return <h1>loading ...</h1>
   }
-  const {twitter, linkedin, youtube, facebook} = contactinfo;
+  const {twitter, linkedin, youtube, facebook, instagram} = contactinfo;
   console.log(contactinfo.address);
   return (
     <footer className="bg-[#000050] text-white py-8">
@@ -41,6 +41,12 @@ export default function Footer() {
               facebook && <Link href={facebook} className="flex items-center space-x-1 text-sm underline">
               <Facebook className="w-4 h-4" />
               <span>Facebook</span>
+            </Link>
+            }
+            {
+              instagram &&  <Link href={instagram} className="flex items-center space-x-1 text-sm underline">
+              <Instagram className="w-4 h-4" />
+              <span>Instagram</span>
             </Link>
             }
           </div>

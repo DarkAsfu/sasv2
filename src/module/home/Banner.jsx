@@ -9,7 +9,7 @@ const Banner = () => {
     const bannerImage = contactinfo?.banner_image || '';
 
     return (
-        <div className='mt-4'>
+        <div className=''>
             <div className='max-w-[1380px] mx-auto px-4'>
                 <div
                     className='h-[70vh] md:h-[70vh] bg-cover bg-center bg-no-repeat relative'
@@ -24,10 +24,10 @@ const Banner = () => {
                     <div className="relative z-10 h-full flex flex-col md:flex-row items-center justify-between">
                         <div className='bg-white max-w-[600px] m-4 px-4 py-10 md:mx-10 md:p-10'>
                             <h4 className='text-primary text-[36px] md:text-[52px] md:leading-[64px] tracking-tighter font-normal'>
-                                Agility when it matters most.
+                                {contactinfo?.banner_title}
                             </h4>
                             <p className="mt-4">
-                                In a world that’s only getting bigger, we help you adapt, evolve, and lead with confidence and clarity.
+                                {contactinfo?.banner_description}
                             </p>
                             <Button className="rounded-none mt-24">Learn More</Button>
                         </div>

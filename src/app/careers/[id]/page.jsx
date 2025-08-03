@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import useFetch from '@/hooks/useFetch'
+import Link from 'next/link'
 
 const JobDetailsPage = () => {
   const { id } = useParams()
@@ -82,7 +83,7 @@ const JobDetailsPage = () => {
                 <span>{job.experience} Year{job.experience !== 1 ? 's' : ''} Experience</span>
               </div>
               <div className="flex items-center gap-1">
-                <DollarSign className="h-4 w-4 text-v0-orange" />
+                {/* <DollarSign className="h-4 w-4 text-v0-orange" /> */}
                 <span>Salary: {job.salary_range} BDT</span>
               </div>
               {job.is_fresher && (
@@ -107,9 +108,11 @@ const JobDetailsPage = () => {
                 dangerouslySetInnerHTML={{ __html: job.responsibility }}
               />
             </div>
-            <Button className="bg-v0-orange hover:bg-v0-orange/90 text-white rounded-lg px-8 py-3 text-lg w-full">
+            <Link href={job?.application_link ? job.application_link : ""} className='cursor-pointer'>
+            <Button className="bg-primary max-w-max rounded-lg px-8 py-3 text-[14px] w-full">
               Apply Now
             </Button>
+            </Link>
           </CardContent>
         </Card>
       </div>

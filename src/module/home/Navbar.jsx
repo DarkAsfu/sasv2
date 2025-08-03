@@ -66,7 +66,7 @@ export function Navbar() {
       title: "Solutions",
       sections: [
         {
-          title: "Services",
+          title: "Product & Services",
           items: dynamicServiceItems
         },
         {
@@ -76,12 +76,6 @@ export function Navbar() {
             { name: "All Partners", url: "/all-partners" },
           ]
         },
-        // {
-        //   title: "Technology",
-        //   items: [
-        //     { name: "NFC", url: "#" },
-        //   ]
-        // }
       ]
     },
     about: {
@@ -91,7 +85,7 @@ export function Navbar() {
           title: "Our Story",
           items: [
             { name: "Our Company", url: "/about/our-story/company" },
-            { name: "2024 Annual Report", url: "/about/our-story/annual-report" },
+            { name: "Annual Report", url: "/about/our-story/annual-report" },
             { name: "Industry Recognition", url: "/about/our-story/industry-recognition" },
             // { name: "Office Locations", url: "/contact#office-locations" }
           ]
@@ -99,8 +93,8 @@ export function Navbar() {
         {
           title: "Our People",
           items: [
-            { name: "Our Team", url: "/about/our-people/team" },
             { name: "Leadership", url: "/about/our-people/leadership" },
+            { name: "Our Team", url: "/about/our-people/team" },
             { name: "Careers", url: "/careers", external: true }
           ]
         },
@@ -116,8 +110,8 @@ export function Navbar() {
   }
 
   return (
-    <div className="w-full bg-white relative" ref={navbarRef}>
-      <div className="pt-4">
+    <div className="w-full bg-white fixed z-100 top-0" ref={navbarRef}>
+      <div className="">
         {/* Logo and Main Header */}
         <div className="flex max-w-[1380px] mx-auto items-center mb-2 gap-2 px-4">
           <Link href="/">
